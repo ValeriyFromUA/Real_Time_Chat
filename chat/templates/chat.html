@@ -4,6 +4,10 @@
 <div class="flex flex-col items-center">
     <h1>WebSocket Chat</h1>
     <h2>Your ID: <span id="ws-id"></span></h2>
+    <form action="" onsubmit="setName(event)">
+        <input class="bg-green-300" type="text" id="nameInput" autocomplete="off" placeholder="Enter your name"/>
+        <button>Set Name</button>
+    </form>
     <form action="" onsubmit="sendMessage(event)">
         <input class="bg-green-300" type="text" id="messageText" autocomplete="off"/>
         <button>Send</button>
@@ -49,6 +53,22 @@
         ws.send(input.value)
         input.value = ''
         event.preventDefault()
+    }
+
+    async function setName(event) {
+        event.preventDefault();
+        const nameInput = document.getElementById("nameInput");
+        const name = nameInput.value;
+        const data = {"name": name};
+        const response = await fetch('http://localhost:8000/chat/set_name', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+        const responseData = await response.json();
+        document.querySelector("#ws-id").textContent = responseData.name;
     }
 </script>
 {% endblock %}

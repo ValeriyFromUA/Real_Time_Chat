@@ -7,3 +7,7 @@ class MessagesModel(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class NameSchema(BaseModel):
+    name: str

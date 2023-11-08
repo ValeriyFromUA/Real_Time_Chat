@@ -34,6 +34,7 @@ class Guest(Base):
     name = Column(String, unique=False)
     messages = relationship("Message", secondary="guest_messages", backref="guests", cascade="all,delete")
     rooms = relationship("Room", secondary="guest_rooms", backref="guests", cascade="all,delete")
+    guest_id = Column(String, unique=True)
 
 
 class Message(Base):

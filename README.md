@@ -17,10 +17,6 @@ To run the FastAPI server, use the following command:
 ```uvicorn chat.main:app --reload```
 The server will be available at [http://localhost:8000](http://localhost:8000).
 
-## API Documentation
-
-API routes and their usage can be found in the [API documentation](api-docs.md).
-
 ## Contributing
 
 If you would like to contribute to this project, please open an issue or create a pull request.
