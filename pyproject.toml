@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "chat"
+version = "0.1.0"
+description = ""
+authors = ["Valeriy Vasilenko <hitehnik132@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.104.1"
+sqlalchemy = "^2.0.23"
+aiohttp = "^3.8.6"
+flake8 = "^6.1.0"
+isort = "^5.12.0"
+pre-commit = "^3.5.0"
+uvicorn = "^0.24.0.post1"
+alembic = "^1.12.1"
+asyncpg = "^0.29.0"
+python-dotenv = "^1.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
