@@ -107,3 +107,4 @@ celerybeat-schedule
 # migrations
 000*.py
 /migrations
+alembic.ini

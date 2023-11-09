@@ -37,7 +37,6 @@ async def set_name(name_data: GuestSchema, db: AsyncSession = Depends(get_async_
     name = name_data.name
     guest_id = str(uuid.uuid4())
     guest = Guest(name=name, guest_id=guest_id)
-    print(guest)
     db.add(guest)
     await db.commit()
     await db.close()
