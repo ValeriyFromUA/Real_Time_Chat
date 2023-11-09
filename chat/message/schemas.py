@@ -8,7 +8,3 @@ class MessagesModel(BaseModel):
 
     class Config:
         from_attributes = True
-
-
-class NameSchema(BaseModel):
-    name: str

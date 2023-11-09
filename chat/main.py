@@ -1,11 +1,15 @@
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
-from chat.core.routers import router as chat_router
+from chat.guest.routers import router as guest_router
+from chat.message.routers import router as message_router
+from chat.room.routers import router as room_router
 from chat.pages.routers import pages_router
 
 app = FastAPI()
 
-app.include_router(chat_router)
+app.include_router(guest_router)
+app.include_router(message_router)
+app.include_router(room_router)
 app.include_router(pages_router)
 origins = ["*"]
 app.add_middleware(

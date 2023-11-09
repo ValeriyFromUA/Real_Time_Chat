@@ -5,7 +5,9 @@ from sqlalchemy import pool
 from chat.database.db import metadata, Base
 from alembic import context
 from chat.config import DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER
-from chat.core.models import *
+from chat.guest.models import *
+from chat.message.models import *
+from chat.room.models import *
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
