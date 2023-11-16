@@ -106,5 +106,4 @@ celerybeat-schedule
 
 # migrations
 000*.py
-/migrations
-alembic.ini
+migrations/__pycache__/
