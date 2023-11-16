@@ -70,8 +70,6 @@ http://0.0.0.0:7000/rooms/create_room - create room with name and description
 http://0.0.0.0:7000/rooms/join_room - allows you to pin the user to the room, probably a rudiment, needs revision
 http://0.0.0.0:7000/rooms/get_rooms - allows you to view the keys to which the user is attached, probably a rudiment, needs revision
 
-http://0.0.0.0:7000/pages/room/{room_id} - allows you to test the chat with a primitive interface (rudiment)
-
 
 
 
