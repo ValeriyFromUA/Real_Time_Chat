@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from datetime import datetime
 
@@ -13,3 +13,5 @@ class Room(Base):
     description = Column(String)
     created_at = Column(DateTime, default=datetime.now)
     messages = relationship("Message", back_populates="rooms")
+    category_id = Column(Integer, ForeignKey("categories.id"))
+    categories = relationship("Category", back_populates="rooms")

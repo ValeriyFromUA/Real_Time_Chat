@@ -34,4 +34,4 @@ class Guest(Base):
     messages = relationship("Message", secondary="guest_messages", backref="guests", cascade="all,delete",
                             lazy='subquery')
     rooms = relationship("Room", secondary="guest_rooms", backref="guests", cascade="all,delete", lazy='subquery')
-    guest_id = Column(String, unique=True)
+    guest_uuid = Column(String, unique=True)

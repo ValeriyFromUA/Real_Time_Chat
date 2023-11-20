@@ -6,6 +6,7 @@ from chat.database.db import metadata, Base
 from alembic import context
 from chat.config import DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER
 from chat.guest.models import *
+from chat.category.models import *
 from chat.message.models import *
 from chat.room.models import *
 
