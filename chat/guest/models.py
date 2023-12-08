@@ -33,5 +33,6 @@ class Guest(Base):
     name = Column(String, unique=False)
     messages = relationship("Message", secondary="guest_messages", backref="guests", cascade="all,delete",
                             lazy='subquery')
+    room_id = Column(Integer, ForeignKey("rooms.id"))
     rooms = relationship("Room", secondary="guest_rooms", backref="guests", cascade="all,delete", lazy='subquery')
     guest_uuid = Column(String, unique=True)

@@ -76,7 +76,7 @@
     }
 
     async function getLastMessages() {
-        const url = `http://localhost:8000/messages/get_room_messages/{{ room_id }}`
+        const url = `http://${window.location.host}/messages/get_room_messages/{{ room_id }}`
         const response = await fetch(url, {
             method: 'GET'
         })
@@ -90,7 +90,8 @@
             });
         });
 
-    let ws = new WebSocket(`ws://localhost:8000/messages/send_message/{{ room_id }}`);
+    let ws = new WebSocket(`ws://${window.location.host}/messages/send_message/{{ room_id }}`);
+
     ws.onmessage = function (event) {
         appendMessage(event.data)
     };

@@ -107,4 +107,3 @@ celerybeat-schedule
 # migrations
 000*.py
 migrations/__pycache__/
-migrations

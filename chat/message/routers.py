@@ -35,7 +35,7 @@ async def send_message(websocket: WebSocket, room_id: int, guest: Guest = Depend
         while True:
             data = await websocket.receive_text()
             async with db as session:
-                query = select(Guest).where(Guest.id == guest["id"])
+                query = select(Guest).where(Guest.id == guest.id)
                 result = await session.execute(query)
                 sender = result.scalars().first()
                 message = Message(content=data, room_id=room_id)
@@ -44,7 +44,7 @@ async def send_message(websocket: WebSocket, room_id: int, guest: Guest = Depend
                 session.add(sender)
                 await session.commit()
 
-            await manager.broadcast(f"{guest['name']}: {data}", add_to_db=True, room_id=room_id)
+            await manager.broadcast(f"{guest.name}: {data}", add_to_db=True, room_id=room_id)
 
     except WebSocketDisconnect:
         manager.disconnect(websocket)
