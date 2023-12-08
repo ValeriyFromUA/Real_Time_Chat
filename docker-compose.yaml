@@ -2,7 +2,7 @@ version: '3'
 services:
   web:
     build: .
-    command: sh -c "alembic upgrade head && uvicorn chat.main:app --reload --port=7000 --host=0.0.0.0"
+    command: sh -c "alembic upgrade head && uvicorn chat.main:app --reload --port=${APP_PORT} --host=${APP_HOST}"
     ports:
       - 7000:7000
     depends_on:
