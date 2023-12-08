@@ -16,8 +16,8 @@ router = APIRouter(
 )
 
 
-@router.get("/current_user", response_model=GuestSchema)
-async def get_user(guest_uuid: str = Cookie(None), db: AsyncSession = Depends(get_async_session)):
+@router.get("/current_user")
+async def current_user(guest_uuid: str = Cookie(None), db: AsyncSession = Depends(get_async_session)):
     if guest_uuid:
         async with db as session:
             query = select(Guest).where(Guest.guest_uuid == guest_uuid)
@@ -26,10 +26,14 @@ async def get_user(guest_uuid: str = Cookie(None), db: AsyncSession = Depends(ge
 
         if guest:
             return guest
+        #     else:
+        #         raise HTTPException(status_code=404, detail=f"Guest with id {guest_uuid} not found")
+        #
+        # raise HTTPException(status_code=404, detail=
         else:
-            raise HTTPException(status_code=404, detail=f"Guest with id {guest_uuid} not found")
+            return {"id": 1, 'name': 'Unknown'}
 
-    raise HTTPException(status_code=404, detail=f"Guest without id not found")
+    return {"id": 1, 'name': 'Unknown'}
 
 
 @router.post("/create")

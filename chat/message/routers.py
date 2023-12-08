@@ -7,7 +7,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from chat.database.db import get_async_session
 from chat.guest.models import Guest
-from chat.guest.routers import get_user
+from chat.guest.routers import current_user
 from chat.message.models import Message
 from chat.message.schemas import MessagesModel
 from chat.websocket.ws import manager
@@ -28,7 +28,7 @@ async def get_room_messages(room_id: int,
 
 
 @router.websocket("/send_message/{room_id}")
-async def send_message(websocket: WebSocket, room_id: int, guest: Guest = Depends(get_user),
+async def send_message(websocket: WebSocket, room_id: int, guest: Guest = Depends(current_user),
                        db: AsyncSession = Depends(get_async_session)):
     await manager.connect(websocket)
     try:

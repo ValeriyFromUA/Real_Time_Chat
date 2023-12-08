@@ -18,7 +18,6 @@ router = APIRouter(
 @router.post("/create", response_model=RoomSchema)
 async def create_room(room_name: str, category_id=int, description: str = "",
                       db: AsyncSession = Depends(get_async_session)):
-    print(category_id)
     room = Room(name=room_name, description=description, category_id=int(category_id))
     db.add(room)
     await db.commit()
