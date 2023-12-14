@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import joinedload
+from sqlalchemy.orm import joinedload, selectinload
 
 from chat.category.models import Category
 from chat.database.db import get_async_session
@@ -73,7 +73,7 @@ async def get_rooms(db: AsyncSession = Depends(get_async_session)):
 @router.get("/users/{room_id}", response_model=list[GuestSchema])
 async def get_users_in_rooms(room_id: int, db: AsyncSession = Depends(get_async_session)):
     async with db as session:
-        query = select(Guest).options(joinedload(Guest.rooms)).where(Guest.rooms == room_id)
+        query = select(Guest).options(selectinload(Guest.rooms)).where(Guest.rooms.any(Room.id == room_id))
         result = await session.execute(query)
 
     guests = result.scalars().all()
