@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload, selectinload
@@ -26,7 +26,7 @@ async def create_room(room_name: str, category_id=int, description: str = "",
     return room
 
 
-@router.post("/join/{room_id}")
+@router.post("/{room_id}/join")
 async def join_room(room_id: int, guest_id: int, db: AsyncSession = Depends(get_async_session)):
     async with db as session:
         query = select(Room).where(Room.id == room_id)
@@ -59,7 +59,7 @@ async def get_user_rooms(guest_id: int, db: AsyncSession = Depends(get_async_ses
         return {"error": "Guest not found"}
 
 
-@router.get("/all", response_model=list[RoomDetailSchema])
+@router.get("/", response_model=list[RoomDetailSchema])
 async def get_rooms(db: AsyncSession = Depends(get_async_session)):
     async with db as session:
         query = select(Room)
@@ -70,7 +70,27 @@ async def get_rooms(db: AsyncSession = Depends(get_async_session)):
     return rooms
 
 
-@router.get("/users/{room_id}", response_model=list[GuestSchema])
+@router.delete("/{room_id}/delete", response_model=dict)
+async def delete_user(room_id: int, db: AsyncSession = Depends(get_async_session)):
+    async with db as session:
+        query = select(Room).where(Room.id == room_id)
+        result = await session.execute(query)
+        room = result.scalars().first()
+        if room:
+            deleted_guest_info = {
+                "status_code": 204,
+                "id": room.id,
+                "name": room.name,
+                "message": f"Room with id {room} deleted successfully"
+            }
+            await session.delete(room)
+            await session.commit()
+            return deleted_guest_info
+
+        raise HTTPException(status_code=404, detail=f"Guest with id {room_id} not found")
+
+
+@router.get("/{room_id}/users", response_model=list[GuestSchema])
 async def get_users_in_rooms(room_id: int, db: AsyncSession = Depends(get_async_session)):
     async with db as session:
         query = select(Guest).options(selectinload(Guest.rooms)).where(Guest.rooms.any(Room.id == room_id))

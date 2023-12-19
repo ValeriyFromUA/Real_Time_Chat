@@ -26,14 +26,9 @@ async def current_user(guest_uuid: str = Cookie(None), db: AsyncSession = Depend
 
         if guest:
             return guest
-        #     else:
-        #         raise HTTPException(status_code=404, detail=f"Guest with id {guest_uuid} not found")
-        #
-        # raise HTTPException(status_code=404, detail=
-        else:
-            return {"id": 1, 'name': 'Unknown'}
 
-    return {"id": 1, 'name': 'Unknown'}
+        raise HTTPException(status_code=404, detail=f"Guest not found")
+    raise HTTPException(status_code=404, detail=f"Guest not found")
 
 
 @router.post("/create")
