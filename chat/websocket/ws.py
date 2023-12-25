@@ -25,8 +25,8 @@ class ConnectionManager:
     async def broadcast(self, message: str, add_to_db: bool, room_id: int):
         if add_to_db:
             await self.add_messages_to_database(message, room_id)
-        for connection in self.active_connections:
-            await connection.send_text(message)
+            for connection in self.active_connections:
+                await connection.send_text(message)
 
     @staticmethod
     async def add_messages_to_database(message: str, room_id: int):
