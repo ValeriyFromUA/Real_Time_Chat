@@ -40,7 +40,7 @@ async def create_user(name_data: SetGuestSchema, db: AsyncSession = Depends(get_
     await db.commit()
     await db.close()
     response = JSONResponse(content={'name': guest.name, 'id': guest.id})
-    response.set_cookie(key='guest_uuid', value=guest.guest_uuid, max_age=3600000)
+    response.set_cookie(key='guest_uuid', value=guest.guest_uuid, max_age=3600000, secure=False, samesite=None)
     return response
 
 
@@ -60,7 +60,7 @@ async def change_name(name_data: SetGuestSchema, guest_uuid: str = Cookie(None),
     await db.close()
 
     response = JSONResponse(content={'name': guest.name})
-    response.set_cookie(key='guest_uuid', value=guest.guest_uuid, max_age=3600000)
+    response.set_cookie(key='guest_uuid', value=guest.guest_uuid, max_age=3600000, secure=False, samesite=None)
     return response
 
 
