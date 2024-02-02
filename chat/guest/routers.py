@@ -39,8 +39,9 @@ async def create_user(name_data: SetGuestSchema, db: AsyncSession = Depends(get_
     db.add(guest)
     await db.commit()
     await db.close()
-    response = JSONResponse(content={'name': guest.name, 'id': guest.id})
-    response.set_cookie(key='guest_uuid', value=guest.guest_uuid, max_age=3600000, secure=False, samesite=None)
+    response = JSONResponse(content={'name': guest.name, 'id': guest.id, 'uuid': guest.guest_uuid})
+    response.set_cookie(key='guest_uuid', value=guest.guest_uuid, max_age=3600000, secure=True, samesite=None,
+                        httponly=True)
     return response
 
 

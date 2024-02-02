@@ -21,8 +21,9 @@ app.add_middleware(
     allow_origins=ORIGINS,
     allow_credentials=True,
     allow_methods=["GET", "POST", "OPTIONS", "DELETE", "PATCH", "PUT"],
-    allow_headers=["Content-Type", "Set-Cookie", "Access-Control-Allow-Headers", "Access-Control-Allow-Origin",
+    allow_headers=["Content-Type", "Access-Control-Allow-Headers", "Access-Control-Allow-Origin",
                    "Authorization"],
+    expose_headers=["Set-Cookie"],
 )
 
 
