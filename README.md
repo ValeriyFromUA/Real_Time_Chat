@@ -57,21 +57,6 @@ The server will be available at [http://localhost:7000](http://localhost:7000).
 [Swagger UI](http://0.0.0.0:7000/docs)
 
 ```
-http://0.0.0.0:7000/docs - Documentation, endpoints, data formats, IMPORTANTLY.
-
-http://0.0.0.0:7000/guests/get_user - return user from DB or unknown User (need some fix)
-http://0.0.0.0:7000/guests/set_name - create new user with name
-http://0.0.0.0:7000/guests/get_name - return username from Cookie
-http://0.0.0.0:7000/guests/change_name - change username, get user by Cookie
-
-http://0.0.0.0:7000/messages/get_room_messages/{room_id} - return messages for room #{room_id} (need some fix)
-
-http://0.0.0.0:7000/rooms/create_room - create room with name and description
-http://0.0.0.0:7000/rooms/join_room - allows you to pin the user to the room, probably a rudiment, needs revision
-http://0.0.0.0:7000/rooms/get_rooms - allows you to view the keys to which the user is attached, probably a rudiment, needs revision
-
-
-
 
 ```
 
