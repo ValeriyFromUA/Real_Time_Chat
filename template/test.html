@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Frontend</title>
+</head>
+<body>
+<h2>Create User</h2>
+<input type="text" id="name" placeholder="Enter Name">
+<button onclick="createUser()">Create User</button>
+
+<h2>Get Current User</h2>
+<button onclick="getCurrentUser()">Get Current User</button>
+
+<script>
+    const apiUrl = 'http://127.0.0.1:8000/guests';
+
+    function createUser() {
+        const name = document.getElementById('name').value;
+        fetch(`${apiUrl}/create`, {
+            method: 'POST',
+            credentials: 'include', // Дозволяє відправлення/прийняття кукі
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name: name })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            alert(`User Created: ${data.name} (ID: ${data.id}, UUID: ${data.uuid})`);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alert('Error creating user');
+        });
+    }
+
+    function getCurrentUser() {
+    // Перевірка наявності кукі
+    console.log('Current cookies:', document.cookie);
+
+    fetch(`${apiUrl}/current_user`, {
+        method: 'GET',
+        credentials: 'include', // Необхідно для прийняття кукі
+    })
+    .then(response => {
+        console.log('Response headers:', response.headers);
+        if (!response.ok) {
+            throw new Error(`User not found, status code: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Current User:', data);
+        alert(`Current User: ${data.name} (ID: ${data.id}, UUID: ${data.guest_uuid})`);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        alert(error.message);
+    });
+}
+
+</script>
+</body>
+</html>
