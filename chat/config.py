@@ -6,6 +6,7 @@ load_dotenv()
 ORIGINS = [
     "http://localhost",
     "http://127.0.0.1",
+    "http://0.0.0.0",
     "http://localhost:3000",
 ]
 APP_HOST = os.environ.get('APP_HOST')

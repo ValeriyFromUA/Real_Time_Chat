@@ -39,9 +39,8 @@ Change file `alembic.ini` like in example `arch\alembic.ini`
 ## Running with Docker ![Docker](https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
 1. `sudo docker-compose build`
-2. `sudo docker-compose run web alembic revision --autogenerate -m "First migration"`
-3. `sudo docker-compose run web alembic upgrade head`
-4. `sudo docker-compose up`
+2. `sudo docker-compose run web alembic upgrade head`
+3. `sudo docker-compose up`
 
 Application will be available  [here](http://0.0.0.0:7000/).
 
