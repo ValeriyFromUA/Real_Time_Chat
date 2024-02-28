@@ -1,0 +1,109 @@
+# Byte-compiled / optimized Python files
+__pycache__/
+*.py[cod]
+*$py.class
+exp.py
+# Environment folder
+env/
+.venv
+.env_prod
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+*.egg/
+.Python
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+.installed.cfg
+MANIFEST
+
+# Local development settings
+.env
+prod.env
+
+# IDE-specific files
+.vscode/
+.idea/
+.spyderproject
+.spyproject
+.ropeproject
+.ipynb_checkpoints
+ipython_config.py
+.profile_default/
+site/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Editor backups
+*~
+
+# Vagrant
+.vagrant/
+
+# Miscellaneous
+.DS_Store
+Thumbs.db
+
+# Unit web_test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django
+local_settings.py
+db.sqlite3
+
+# Flask
+instance/
+.webassets-cache
+
+# Scrapy
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Celery beat schedule file
+celerybeat-schedule
+
+# SageMath parsed files
+*.sage.py
+
+
+
+# mkdocs documentation
+/site
+
+# migrations
+000*.py
+migrations/__pycache__/

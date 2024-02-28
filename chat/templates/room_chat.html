@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 400px;
+        margin: auto;
+        padding: 10px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+
+    textarea {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #3498db;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 5px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+</style>
+{% block content %}
+<br>
+<div class="container"
+     style="max-width: 400px; margin: auto; padding: 10px; background-color: #fff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border-radius: 5px; margin-top: 20px;">
+    <form action="" onsubmit="sendMessage(event)">
+        <textarea style="width: 100%; padding: 5px; margin-bottom: 10px; box-sizing: border-box;" rows="5"
+                  id="messageText" autocomplete="off"></textarea>
+        <button style="width: 100%; padding: 10px; background-color: #3498db; color: #fff; border: none; border-radius: 5px; cursor: pointer;">
+            Send
+        </button>
+    </form>
+    <ul id='messages' style="list-style-type: none; padding: 0;">
+        {% for msg in last_messages %}
+        <li style="margin-bottom: 5px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background-color: #f9f9f9;">
+            {{ msg.content }}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<script>
+    function appendMessage(msg) {
+        let messages = document.getElementById('messages')
+        let message = document.createElement('li')
+        let content = document.createTextNode(msg)
+        message.appendChild(content)
+        messages.appendChild(message)
+    }
+
+    async function getLastMessages() {
+        const url = `http://${window.location.host}/messages/get_room_messages/{{ room_id }}`
+        const response = await fetch(url, {
+            method: 'GET'
+        })
+        return response.json()
+    }
+
+    getLastMessages()
+        .then(messages => {
+            messages.forEach(msg => {
+                appendMessage(msg.content)
+            });
+        });
+
+    let ws = new WebSocket(`ws://${window.location.host}/messages/send_message/{{ room_id }}`);
+
+    ws.onmessage = function (event) {
+        appendMessage(event.data)
+    };
+
+    function sendMessage(event) {
+        let input = document.getElementById("messageText")
+        ws.send(input.value)
+        input.value = ''
+        event.preventDefault()
+    }
+</script>
+{% endblock %}
