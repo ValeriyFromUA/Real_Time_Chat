@@ -22,7 +22,7 @@ Python.
 ### Hints:
 
 - init migrations: ```alembic init migrations ```
-  Now you see migrations folder and alembic.ini file
+  Now you see migrations folder and alembic.ini file 
 
 Change file `migrations\env.py` like in example: `arch\env.py`
 Change file `alembic.ini` like in example `arch\alembic.ini`
