@@ -7,22 +7,22 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-fastapi = "^0.104.1"
-sqlalchemy = "^2.0.23"
-aiohttp = "^3.8.6"
-flake8 = "^6.1.0"
-isort = "^5.12.0"
-pre-commit = "^3.5.0"
-uvicorn = {extras = ["standart"], version = "^0.24.0.post1"}
-alembic = "^1.12.1"
-asyncpg = "^0.29.0"
-python-dotenv = "^1.0.0"
-websockets = "^12.0"
-jinja2 = "^3.1.2"
-pytest = "^7.4.4"
-httpx = "^0.26.0"
-coverage = "^7.4.0"
-pytest-asyncio = "^0.23.3"
+fastapi = "^0.115.12"
+sqlalchemy = "^2.0.40"
+aiohttp = "^3.11.18"
+flake8 = "^7.2.0"
+isort = "^6.0.1"
+pre-commit = "^4.2.0"
+uvicorn = {extras = ["standart"], version = "^0.34.2"}
+alembic = "^1.15.2"
+asyncpg = "^0.30.0"
+python-dotenv = "^1.1.0"
+websockets = "^15.0"
+jinja2 = "^3.1.6"
+pytest = "^8.3.5"
+httpx = "^0.28.1"
+coverage = "^7.8.0"
+pytest-asyncio = "^0.26.0"
 
 
 [build-system]
